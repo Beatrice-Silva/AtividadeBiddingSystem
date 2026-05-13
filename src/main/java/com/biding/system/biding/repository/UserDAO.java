@@ -23,7 +23,7 @@ public class UserDAO {
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
-            stmt = conn.prepareStatement("INSERT INTO usuarios VALUES (nome, email, senha, role,)(?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO usuarios  (nome, email, senha, role)VALUES (?,?,?,?)");
             
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getEmail());
@@ -48,7 +48,7 @@ public class UserDAO {
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            stmt = conn.prepareStatement("SELECT * FROM usuario WHERE email = ? AND senha = ?;");
+            stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ?;");
      
             stmt.setString(1, email);
             stmt.setString(2, senha);
@@ -56,9 +56,9 @@ public class UserDAO {
             
             rs = stmt.executeQuery();
             if(rs.next()){
+                user.setEmail(rs.getString("email"));
                 user.setId(rs.getLong("id"));
                 user.setNome(rs.getString("nome"));
-                user.setEmail(rs.getString("email"));
                 user.setRole(rs.getString("role"));
             }
             
