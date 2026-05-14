@@ -57,6 +57,7 @@ public class UserService {
         if(!mensagem.equals("")){
                  throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem);    
         }
+        
         UserDTO dadosLogado = repository.logar(user.getEmail(), user.getSenha());
         return tokenService.gerarToken(dadosLogado);
              

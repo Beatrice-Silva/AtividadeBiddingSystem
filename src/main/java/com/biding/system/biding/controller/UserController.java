@@ -28,7 +28,7 @@ public class UserController {
     @PostMapping("/registrar")
     public String registrar(@RequestBody UserDTO user){
         service.register(user);
-        return "Cadastro Feito com sucedso";
+        return "Cadastro Feito com sucesso";
     }
     
     @PostMapping("/logar")

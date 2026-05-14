@@ -4,13 +4,13 @@
  */
 package com.biding.system.biding.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author Aluno
  */
-public class EditalCriarDTO {
+public class EditalDTO {
     
     private Long id;
     private String titulo;
@@ -18,10 +18,10 @@ public class EditalCriarDTO {
     private Date data_fechamento;
     private String status;
 
-    public EditalCriarDTO() {
+    public EditalDTO() {
     }
 
-    public EditalCriarDTO(Long id, String titulo, String descricao, Date data_fechamento, String status) {
+    public EditalDTO(Long id, String titulo, String descricao, Date data_fechamento, String status) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
