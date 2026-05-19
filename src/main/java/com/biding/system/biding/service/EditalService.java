@@ -59,22 +59,24 @@ public class EditalService {
     }
 
         //Listar Editais (Não recebeu erro e nem resposta (nulo)(+sem vef de usuario auth))
-    public List<EditalDTO> listarEditais(EditalDTO edital,String token){
+    public List<EditalDTO> listarEditais(String token){
         
-        //UserDTO userLogado= tokenService.extrairClaims(token);
-        //String mensagem = "";
+        UserDTO userLogado= tokenService.extrairClaims(token);
+        String mensagem = "";
         
-        //if (Validar token do usuario){ 
-          
-        //}else{
+        if (tokenService.validarToken(token)){ 
+        return repository.listarEditais();   
+        }else{            
+            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "Necessita de cona válida!" );
         //   mensagem += "Token inválido! Permissão falha... "; 
-        //}
+        }
         
-          //if(!mensagem.equals("")){            
-          //  throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem );
-        //}  
-        return repository.listarEditais();            
-    }
+          
+        }  
+        
+        
+                   
+    
   
 
 }
