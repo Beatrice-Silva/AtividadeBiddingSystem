@@ -79,7 +79,9 @@ public class TokenService {
         try {
             // Cria um parser JWT com a chave secreta para validação
             Jwts.parser()
-                    .setSigningKey(getKeySign())
+                    //parser verifyWith moderno do JJWT
+                    .verifyWith(getKeySign())
+                    //.setSigningKey(getKeySign())
                     .build()
                     // Analisa e valida o token (lança exceção se inválido ou expirado)
                     .parseClaimsJws(token);

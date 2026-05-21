@@ -25,8 +25,8 @@ public class LanceDAO {
             
             stmt.setDouble(1, lance.getValor());
             stmt.setDate(2, lance.getData_lance());
-            stmt.setDouble(3, lance.getId_edital());
-            stmt.setDouble(4, lance.getId_usuario());
+            stmt.setLong(3, lance.getId_edital());
+            stmt.setLong(4, lance.getId_usuario());
             
             stmt.executeUpdate();
         }catch(SQLException e){

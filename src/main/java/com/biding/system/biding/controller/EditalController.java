@@ -28,10 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class EditalController {
     
     @Autowired
-    private EditalService service;
+    private EditalService editalService;
     
     @Autowired
-    private LanceService service;
+    private LanceService lanceService;
     
     @PostMapping
     public String cadastrarEdital(
@@ -39,28 +39,26 @@ public class EditalController {
             @RequestBody EditalDTO edital
     ){
         String token = auth.replace("Bearer ", "");
-        service.criarEdital(edital, token);      
+        editalService.criarEdital(edital, token);      
         return "Edital cadastrado com sucesso!";
     }
     
     @GetMapping
-    public List<EditalDTO> listarEditais( 
-            @RequestHeader("Authorization") String auth
-    ){
+    public List<EditalDTO> listarEditais(@RequestHeader("Authorization") String auth){
         String token = auth.replace("Bearer ", "");
-        List<EditalDTO> lista = service.listarEditais(token));
-        return lista;
+        return editalService.listarEditais(token);
+        
     }
     
-    @PostMapping("{id}/lances")
+    @PostMapping("/{id}/lances")
     public String registrarLance(
     @RequestHeader("Authorization") String auth,
     @RequestBody LanceDTO lance,
     @PathVariable Long id
     ){
-        String token = auth.replace("Bearer", "");
+        String token = auth.replace("Bearer ", "");
         
-        service.registrarLance(id, lance, token);
+        lanceService.registrarLance(id, lance, token);
         return "Lance registrado com sucesso!";
     }
     
@@ -70,9 +68,7 @@ public class EditalController {
     public String novoLance(
             @RequestHeader() String auth,
             @RequestBody LanceDTO lance
-    ){
-        
-        
+    ){  
     }
     */
 }

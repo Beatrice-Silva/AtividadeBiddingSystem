@@ -53,12 +53,13 @@ public class EditalService {
             throw new ResponseStatusException(HttpStatusCode.valueOf(500), "Erro ao cadastrra no banco de dados!");
         }
     } else {
-        throw new ResponseStatusException(HttpStatusCode.valueOf(403), "Acesso não autorizado!");
+        throw new ResponseStatusException(HttpStatusCode.valueOf(403), "Acesso não autorizado! Apenas compradores");
         }
         
     }
 
-        //Listar Editais (Não recebeu erro e nem resposta (nulo)(+sem vef de usuario auth))
+        //1 Listar Editais (Não recebeu erro e nem resposta (nulo)(+sem vef de usuario auth))\
+        //2 Corrigido
     public List<EditalDTO> listarEditais(String token){
         
         UserDTO userLogado= tokenService.extrairClaims(token);
@@ -67,11 +68,9 @@ public class EditalService {
         if (tokenService.validarToken(token)){ 
         return repository.listarEditais();   
         }else{            
-            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "Necessita de cona válida!" );
+            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "Necessita de conta válida!" );
         //   mensagem += "Token inválido! Permissão falha... "; 
         }
-        
-          
         }  
         
         

@@ -4,6 +4,7 @@
  */
 package com.biding.system.biding.service;
 
+import com.biding.system.biding.model.AuthResponseDTO;
 import com.biding.system.biding.model.UserDTO;
 import com.biding.system.biding.model.UserRequestDTO;
 import com.biding.system.biding.repository.UserDAO;
@@ -47,21 +48,19 @@ public class UserService {
     }
     
     public String logar(UserRequestDTO user){
-        String mensagem = "";
-        if(user.getEmail().equals("")){
-            mensagem = "Email não preenchido";
-        }else if(user.getSenha().equals("")){
-            mensagem = "Senha não preenchida";
-        }
-        
-        if(!mensagem.equals("")){
-                 throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem);    
+        if(user.getEmail() == null || user.getEmail().isEmpty() || user.getSenha() == null || user.getSenha().isEmpty()){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(403), "Email e Senha devem ser preenchidos"); 
         }
         
         UserDTO dadosLogado = repository.logar(user.getEmail(), user.getSenha());
-        return tokenService.gerarToken(dadosLogado);
-             
-                
+        
+        if(dadosLogado == null){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "Email e Senha incorretos!"); 
+        }
+        
+        String token = tokenService.gerarToken(dadosLogado);
+        return new AuthResponseDTO(token, dadosLogado.getRole());
+              
     }
     
     

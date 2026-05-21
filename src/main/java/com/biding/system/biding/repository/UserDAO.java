@@ -66,7 +66,7 @@ public class UserDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return user;
+        return null; //resposta para o service resolver
     }
     
     

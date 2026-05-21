@@ -31,7 +31,7 @@ public class EditalDAO {
             
             stmt.setString(1, edital.getTitulo());
             stmt.setString(2, edital.getDescricao());
-            stmt.setDate(3, (Date) edital.getData_fechamento());
+            stmt.setDate(3, edital.getData_fechamento());
             stmt.setString(4, edital.getStatus());
             
             
@@ -88,7 +88,6 @@ public class EditalDAO {
                 edital.setStatus(rs.getString("status"));
                   
               }
-                    
                     
         }catch(SQLException e){
             e.printStackTrace();
