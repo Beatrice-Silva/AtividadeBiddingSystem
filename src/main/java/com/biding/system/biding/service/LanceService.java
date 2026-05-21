@@ -54,7 +54,8 @@ public class LanceService {
     //preenche automaticamente os dados a seguuir
     lance.setId_edital(editalId);
     lance.setId_usuario(userLogado.getId());
-    lance.getData_lance(new Date());
+    //data
+    lance.setData_lance((java.sql.Date) new Date());
     
     lanceDAO.criarLance(lance);
         

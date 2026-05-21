@@ -59,7 +59,8 @@ public class UserService {
         }
         
         String token = tokenService.gerarToken(dadosLogado);
-        return new AuthResponseDTO(token, dadosLogado.getRole());
+        //return new AuthResponseDTO(token, dadosLogado.getRole());
+        return null;
               
     }
     

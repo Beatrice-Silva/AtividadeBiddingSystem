@@ -4,14 +4,18 @@
  */
 package com.biding.system.biding.controller;
 
+import com.biding.system.biding.model.AuthResponseDTO;
 import com.biding.system.biding.model.UserDTO;
 import com.biding.system.biding.model.UserRequestDTO;
 import com.biding.system.biding.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  *
@@ -24,7 +28,6 @@ public class UserController {
     @Autowired
     private UserService service;
     
-    
     @PostMapping("/registrar")
     public String registrar(@RequestBody UserDTO user){
         service.register(user);
@@ -32,12 +35,10 @@ public class UserController {
     }
     
     @PostMapping("/logar")
-    public String login(@RequestBody UserRequestDTO user){
-        return service.logar(user); 
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody UserRequestDTO user) {   
+        String response = service.logar(user);
+    throw new ResponseStatusException(HttpStatusCode.valueOf(403), "Este edital se encontra `ENCERRADO`! " );
     }
-    
-    
-    
-    
-    
+
+
 }
