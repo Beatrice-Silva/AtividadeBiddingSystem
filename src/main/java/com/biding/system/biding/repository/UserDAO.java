@@ -24,7 +24,7 @@ public class UserDAO {
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
             stmt = conn.prepareStatement("INSERT INTO usuarios  (nome, email, senha, role)VALUES (?,?,?,?)");
-            
+            System.out.println(conn); 
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getSenha());

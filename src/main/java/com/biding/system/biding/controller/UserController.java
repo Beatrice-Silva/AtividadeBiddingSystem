@@ -36,8 +36,14 @@ public class UserController {
     
     @PostMapping("/logar")
     public ResponseEntity<AuthResponseDTO> login(@RequestBody UserRequestDTO user) {   
-        String response = service.logar(user);
-    throw new ResponseStatusException(HttpStatusCode.valueOf(403), "Este edital se encontra `ENCERRADO`! " );
+        String token = service.logar(user);
+        
+        AuthResponseDTO resposta = new AuthResponseDTO();
+        resposta.setToken(token);
+        
+        return ResponseEntity.ok(resposta);
+        
+    //throw new ResponseStatusException(HttpStatusCode.valueOf(403), "Este edital se encontra `ENCERRADO`! " );
     }
 
 
